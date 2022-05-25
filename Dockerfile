@@ -1,7 +1,20 @@
 # Defining base image to be used
 FROM node:17-alpine 
 
-# Defining working directory for all instructions henceforth inside the image being created (henceforth referred to as image)
+#-------------------------------------------------------------------------------------------------------
+#Docker volumes
+#
+# - Current understanding, a way to map a folder on our system to a location on the image.
+#   - Can be useful in dev environment where rebuilding images after each change is a hassle
+# 
+
+
+#Installing nodemon globally within the image being created (henceforth referred to as image)
+RUN npm install -g nodemon
+
+#ENDOFSECTION-------------------------------------------------------------------------------------------
+
+# Defining working directory for all instructions henceforth inside the image
 WORKDIR /app
 
 #-------------------------------------------------------------------------------------------------------
@@ -12,7 +25,8 @@ WORKDIR /app
 #
 #Post this optimisation, the steps till dependency installation will use layer caching for faster builds.
 #Changes to the code does not affect the lower level layers.
-#-------------------------------------------------------------------------------------------------------
+
+#ENDOFSECTION-------------------------------------------------------------------------------------------
 
 #Copying package.json to working directory
 COPY package.json .
@@ -22,7 +36,7 @@ RUN npm install
 
 #Copying files from our system to the image. 
 # syntax : COPY <source> <destination>
-# Desitnation points to the directory as set by line 5. 
+# Desitnation points to the directory as set by line 18. 
 COPY . .
 
 
@@ -30,4 +44,5 @@ COPY . .
 EXPOSE 4000
 
 #Specifying commands to be executed during runtime
-CMD ["node","index.js"]
+#CMD ["node","index.js"]
+CMD [ "npm","run","dev" ]
