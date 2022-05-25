@@ -19,4 +19,5 @@ app.use("/movies", movieRouter);
 // ANCHOR: Serve movie banner
 app.use("/storage", express.static("public"));
 
-app.listen(3000);
+//Making changes to application to check build speed post Dockerfile optimisation
+app.listen(4000);
