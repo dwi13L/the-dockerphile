@@ -41,7 +41,7 @@ COPY . .
 
 
 #Specifying port number for Docker Desktop. Not necessary for CLI.
-EXPOSE 4000
+EXPOSE 5000
 
 #Specifying commands to be executed during runtime
 #CMD ["node","index.js"]
